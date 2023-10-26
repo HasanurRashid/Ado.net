@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 
 namespace BindAspGridView
@@ -42,7 +43,8 @@ namespace BindAspGridView
             //     con.Close();
             // }
 
-            using (SqlConnection con = new SqlConnection("Data Source= MAAQ-HP; Initial Catalog=CloudHRIS_SML;Integrated Security=true"))
+            string cs = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(cs))
             {
                 SqlCommand cmd = new SqlCommand("Select * from Emp_Official_Info where Emp_Status ='Live' and unit_Id = 1", con);
                 con.Open();
